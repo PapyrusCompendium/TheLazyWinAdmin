@@ -13,4 +13,5 @@ for(;;)
     $computerName = Read-Host -Prompt "Computer Name"
     $wmiObject = Get-WmiObject -List StdRegProv -ComputerName $computerName -Credential $adCreds
     "ID: $($wmiObject.GetDWORDValue(2147483650, "SOFTWARE\WOW6432Node\TeamViewer", "ClientID").uValue)"
+    "Version: $($wmiObject.GetStringValue(2147483650, "SOFTWARE\WOW6432Node\TeamViewer", "Version").sValue)"
 }
