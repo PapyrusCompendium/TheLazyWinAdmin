@@ -7,7 +7,7 @@ function GetCLICredential {
     return New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
 }
 
-$adCreds = Get-GetCLICredential
+$adCreds = GetCLICredential
 for(;;)
 {
     $computerName = Read-Host -Prompt "Computer Name"
