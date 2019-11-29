@@ -1,7 +1,13 @@
 #Author: PapyrusCompendium
 #Description: Help find TeamViewer IDs from computer names.
 
-$adCreds = Get-Credential
+function GetCLICredential {
+    $username = Read-Host -Prompt "Username"
+    $password = Read-Host -Prompt "Password" -AsSecureString
+    return New-Object -TypeName System.Management.Automation.PSCredential -ArgumentList $username, $password
+}
+
+$adCreds = Get-GetCLICredential
 for(;;)
 {
     $computerName = Read-Host -Prompt "Computer Name"
