@@ -11,5 +11,8 @@ $adCreds = GetCLICredential
 for(;;)
 {
     $computerName = Read-Host -Prompt "Computer Name"
-    Get-WmiObject -Class Win32_Product -ComputerName $computerName -Credential $adCreds | Select-Object Name, Version 
+    $wmiObject = Get-WmiObject -List StdRegProv -ComputerName $computerName -Credential $adCreds
+    foreach ($item in $wmiObject.EnumKey(2147483650, "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall").sNames) {
+        $wmiObject.GetStringValue(2147483650, "SOFTWARE\Microsoft\Windows\CurrentVersion\Uninstall\$($item)", "DisplayName").sValue
+    }
 }
